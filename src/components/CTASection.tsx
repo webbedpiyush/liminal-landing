@@ -4,61 +4,56 @@ import { ArrowRight } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section className="py-32 bg-gradient-dark relative overflow-hidden">
+    <section className="py-32 md:py-48 relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/10 rounded-full blur-3xl" />
-      </div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-champagne/30 to-transparent" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-champagne/5 rounded-full blur-[150px]" />
 
       <div className="container px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="font-display text-4xl md:text-6xl font-semibold mb-6">
-            Ready to Never Miss a{" "}
-            <span className="text-gradient-gold">Moment</span>?
+          <p className="font-body text-smoke text-sm tracking-[0.2em] uppercase mb-6">
+            Limited First Edition
+          </p>
+          
+          <h2 className="font-display text-5xl md:text-7xl font-light text-foreground mb-8 leading-[1.1]">
+            Stop watching life through a{" "}
+            <span className="text-gradient italic">screen</span>
           </h2>
-          <p className="text-muted-foreground text-xl mb-12 max-w-xl mx-auto">
-            Join thousands of people who are capturing life's special moments, 
-            hands-free and hassle-free.
+          
+          <p className="font-body text-lg text-smoke max-w-xl mx-auto mb-12 leading-relaxed">
+            The first 1,000 pairs ship this spring. Each one hand-finished. 
+            Each one a commitment to presence over performance.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="hero" size="xl" className="group">
-              Pre-order Now
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+            <Button variant="solid" size="xl" className="group">
+              Reserve Your Pair
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <p className="text-muted-foreground text-sm">
-              Starting at <span className="text-gold font-semibold">$299</span> · Free shipping
-            </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="mt-16 pt-16 border-t border-border"
-          >
-            <div className="grid grid-cols-3 gap-8 text-center">
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-semibold text-gradient-gold">50K+</p>
-                <p className="text-muted-foreground text-sm mt-2">Pre-orders</p>
-              </div>
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-semibold text-gradient-gold">4.9★</p>
-                <p className="text-muted-foreground text-sm mt-2">Rating</p>
-              </div>
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-semibold text-gradient-gold">12hr</p>
-                <p className="text-muted-foreground text-sm mt-2">Battery Life</p>
-              </div>
+          <div className="flex items-center justify-center gap-12 text-center">
+            <div>
+              <p className="font-display text-3xl text-champagne">$349</p>
+              <p className="font-body text-xs text-smoke tracking-wider mt-1">Starting price</p>
             </div>
-          </motion.div>
+            <div className="w-px h-12 bg-border" />
+            <div>
+              <p className="font-display text-3xl text-champagne">847</p>
+              <p className="font-body text-xs text-smoke tracking-wider mt-1">Reserved so far</p>
+            </div>
+            <div className="w-px h-12 bg-border" />
+            <div>
+              <p className="font-display text-3xl text-champagne">Free</p>
+              <p className="font-body text-xs text-smoke tracking-wider mt-1">Shipping worldwide</p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

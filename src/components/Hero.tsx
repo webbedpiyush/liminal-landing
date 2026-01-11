@@ -1,97 +1,94 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import heroGlasses from "@/assets/hero-glasses.png";
+import GlassesCanvas from "@/components/GlassesCanvas";
+import { useState, useEffect } from "react";
 
 const Hero = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = window.innerHeight;
+      setScrollProgress(Math.min(scrollY / maxScroll, 1));
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-      {/* Ambient glow */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-3xl animate-glow-pulse" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D Glasses Canvas */}
+      <div className="absolute inset-0 z-0">
+        <GlassesCanvas scrollProgress={scrollProgress} />
       </div>
 
-      <div className="container relative z-10 px-6 py-20">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <span className="inline-block px-4 py-2 text-sm font-medium text-gold border border-gold/30 rounded-full bg-gold/5">
-              Introducing the Future of Memory
-            </span>
-          </motion.div>
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/80 pointer-events-none z-10" />
 
-          {/* Main headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight mb-6"
+      <div className="container relative z-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="font-body text-smoke text-sm tracking-[0.3em] uppercase mb-8"
           >
-            <span className="text-gradient-gold">Dashcam</span>{" "}
-            <span className="text-foreground">for Life</span>
+            Memory, Redefined
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.7 }}
+            className="font-display text-6xl md:text-8xl lg:text-9xl font-light tracking-tight leading-[0.9] mb-8"
+          >
+            <span className="text-gradient italic">Dashing</span>
+            <br />
+            <span className="text-foreground">Glasses</span>
           </motion.h1>
 
-          {/* Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-body text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+            transition={{ duration: 1, delay: 1 }}
+            className="font-body text-lg md:text-xl text-smoke max-w-xl mx-auto leading-relaxed mb-12"
           >
-            GoPro is for the 1% full of extreme adventures. We're for the 99% — 
-            <span className="text-foreground"> hassle-free recording of life's special moments.</span>
+            While others chase the extraordinary, we celebrate the everyday. 
+            Your dog's first trick. Your child's first steps. The moments that 
+            matter most often happen when you least expect them.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ duration: 1, delay: 1.3 }}
+            className="flex flex-col sm:flex-row gap-6 items-center justify-center"
           >
-            <Button variant="hero" size="xl">
-              Pre-order Now
+            <Button variant="solid" size="xl">
+              Reserve Yours
             </Button>
-            <Button variant="heroOutline" size="xl">
-              Watch Demo
+            <Button variant="elegant" size="xl">
+              Experience
             </Button>
           </motion.div>
         </div>
-
-        {/* Product Image */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-16 md:mt-24 flex justify-center"
-        >
-          <div className="relative">
-            <div className="absolute inset-0 bg-gold/20 blur-3xl rounded-full scale-75" />
-            <img
-              src={heroGlasses}
-              alt="Premium video recording glasses"
-              className="relative z-10 w-full max-w-4xl animate-float"
-            />
-          </div>
-        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
       >
-        <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-2">
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-smoke text-xs tracking-[0.2em] uppercase">Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-2 bg-gold rounded-full"
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-12 bg-gradient-to-b from-champagne to-transparent"
           />
         </div>
       </motion.div>

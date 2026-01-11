@@ -1,29 +1,36 @@
 const Footer = () => {
   return (
-    <footer className="py-12 bg-background border-t border-border">
+    <footer className="py-16 border-t border-border/30">
       <div className="container px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-gold flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold text-sm">D</span>
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            {/* Logo */}
+            <div>
+              <span className="font-display text-xl font-light text-foreground tracking-wide">
+                <span className="text-champagne italic">Dashing</span> Glasses
+              </span>
+              <p className="font-body text-sm text-smoke mt-2">
+                Memory, redefined.
+              </p>
             </div>
-            <span className="font-display text-lg font-semibold text-foreground">
-              Dashcam for Life
-            </span>
+
+            {/* Links */}
+            <div className="flex items-center gap-8 font-body text-sm text-smoke">
+              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+              <a href="#" className="hover:text-foreground transition-colors">Press</a>
+              <a href="#" className="hover:text-foreground transition-colors">Contact</a>
+            </div>
           </div>
 
-          {/* Links */}
-          <div className="flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-            <a href="#" className="hover:text-foreground transition-colors">Contact</a>
+          <div className="mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="font-body text-xs text-smoke">
+              © 2026 Dashing Glasses. All rights reserved.
+            </p>
+            <p className="font-body text-xs text-smoke">
+              Designed with intention. Built for presence.
+            </p>
           </div>
-
-          {/* Copyright */}
-          <p className="text-sm text-muted-foreground">
-            © 2026 Dashcam. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
