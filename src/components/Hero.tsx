@@ -64,7 +64,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 1.3 }}
             className="flex flex-col sm:flex-row gap-6 items-center justify-center">
             <Button variant="solid" size="xl" asChild>
-              <a href="/waitlist">Reserve Yours</a>
+              <a href="#reserve">Reserve Yours</a>
             </Button>
             <Button variant="elegant" size="xl" asChild>
               <a href="/interested">Book a Demo</a>
