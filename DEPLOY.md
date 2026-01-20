@@ -4,45 +4,48 @@ Your waitlist is ready to deploy! Here's what's set up:
 
 ## ✅ What's Ready
 
-- [x] PostgreSQL database schema (Prisma)
-- [x] Waitlist API endpoint (`/api/waitlist`)
-- [x] Form component with validation
+- [x] Waitlist form (name, email, phone)
+- [x] Vercel serverless API (`/api/waitlist`)
+- [x] PostgreSQL database schema
 - [x] Rate limiting & spam protection
-- [x] Database migrations
+- [x] Email validation
 - [x] Environment variables template
 
 ## 🚀 Deploy to Vercel (5 minutes)
 
-### Step 1: Push to GitHub
+### Step 1: Install Dependencies
+```bash
+npm install
+```
+
+### Step 2: Push to GitHub
 ```bash
 git add .
 git commit -m "Add waitlist feature"
 git push
 ```
 
-### Step 2: Import to Vercel
+### Step 3: Deploy to Vercel
 1. Go to https://vercel.com
 2. Click **"New Project"**
 3. Import your GitHub repository
-4. **IMPORTANT**: Click "Edit" next to "Root Directory"
-5. Select `liminal-landing` folder
-6. Click "Continue"
-7. Click "Deploy"
+4. Click **"Deploy"** (no configuration needed)
+5. Wait for deployment to complete
 
-### Step 3: Add Database (After deployment completes)
+### Step 4: Add Database
 1. Go to your Vercel project dashboard
 2. Click **"Storage"** tab
 3. Click **"Create Database"**
 4. Select **"Postgres"**
 5. Click **"Create"**
 6. Wait for database to provision (~30 seconds)
-7. Vercel automatically adds `DATABASE_URL` to your environment
 
-### Step 4: Redeploy
-1. Go to **"Deployments"** tab
-2. Click the three dots (•••) on the latest deployment
-3. Click **"Redeploy"**
-4. Click **"Redeploy"** in the confirmation modal
+### Step 5: Initialize Database
+1. In Vercel dashboard → Storage → Your database
+2. Click **"Query"** tab
+3. Copy the entire content from `db/init.sql`
+4. Paste into the query editor
+5. Click **"Run"**
 
 **Done!** Your waitlist is live. 🎉
 
@@ -57,19 +60,18 @@ Visit your deployment URL and:
 ## 💻 Local Development
 
 ```bash
-cd liminal-landing
-
 # Get your DATABASE_URL from Vercel:
 # Project → Storage → Your Database → .env.local tab
 echo 'DATABASE_URL="your-database-url-here"' > .env
 
-# Install and run
+# Install dependencies
 npm install
-npx prisma db push
+
+# Start dev server
 npm run dev
 ```
 
-Open http://localhost:3000
+Open http://localhost:5173
 
 ## 🗄️ View Database Entries
 
@@ -78,13 +80,10 @@ Open http://localhost:3000
 2. Click "Data" tab
 3. View `waitlist_entries` table
 
-### Using Prisma Studio (Local):
-```bash
-cd liminal-landing
-npx prisma studio
+### Using SQL Query:
+```sql
+SELECT * FROM waitlist_entries ORDER BY created_at DESC;
 ```
-
-Opens at http://localhost:5555
 
 ## 🔧 Troubleshooting
 
@@ -100,7 +99,7 @@ Opens at http://localhost:5555
 ### Database connection error
 - Verify `DATABASE_URL` format: `postgresql://user:pass@host:5432/db`
 - Check if database is running (Vercel Postgres should always be up)
-- Try regenerating Prisma client: `npx prisma generate`
+- Make sure you ran the `db/init.sql` script in your database
 
 ## 📊 Database Schema
 
@@ -125,14 +124,14 @@ waitlist_entries
 
 ## 🆘 Need Help?
 
-1. Check [WAITLIST_SETUP.md](./liminal-landing/WAITLIST_SETUP.md)
-2. Check Vercel deployment logs
-3. Check browser console for errors
-4. Verify environment variables are set
+1. Check Vercel deployment logs (Vercel dashboard → Deployments → Click deployment → Functions tab)
+2. Check browser console for errors
+3. Verify environment variables are set (`DATABASE_URL`)
+4. Make sure database table was created (run `db/init.sql`)
 
 ---
 
-**Current Location**: All code is in `liminal-landing/` folder
-**Framework**: Next.js 16 (App Router)
-**Database**: PostgreSQL (via Prisma + Neon adapter)
+**Framework**: Vite + React
+**Database**: PostgreSQL (Neon serverless adapter)
+**API**: Vercel Serverless Functions
 **Deployment**: Vercel

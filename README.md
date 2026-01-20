@@ -1,77 +1,74 @@
-# Liminal Landing
+# Liminal Landing - Waitlist
 
-Landing page with waitlist functionality built with Next.js and PostgreSQL.
+Landing page with PostgreSQL waitlist. Plug & play for Vercel.
 
-## 🚀 Quick Deploy to Vercel
+## 🚀 Deploy to Vercel (3 steps)
 
-**The app is in the `liminal-landing` folder.**
+### 1. Push to GitHub
+```bash
+git add .
+git commit -m "Add waitlist"
+git push
+```
 
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Add waitlist"
-   git push
-   ```
+### 2. Deploy to Vercel
+- Go to [vercel.com](https://vercel.com)
+- Click "New Project" → Import your repo
+- Click "Deploy"
 
-2. **Deploy to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project" → Import your repo
-   - **Important**: Set root directory to `liminal-landing`
-   - Click "Deploy"
+### 3. Add Database
+- In Vercel dashboard → Your project → "Storage" tab
+- Click "Create Database" → "Postgres" → "Create"
+- Go to your database → "Query" tab
+- Copy & paste the SQL from `db/init.sql` → Run query
+- Done!
 
-3. **Add Database** (After deployment)
-   - In Vercel dashboard → Your project → "Storage" tab
-   - Click "Create Database" → "Postgres"
-   - Click "Create" (free tier available)
-   - Vercel automatically adds `DATABASE_URL`
-   - Redeploy to activate database
-
-**That's it!** Your waitlist is live.
+Your waitlist is live 🎉
 
 ## 💻 Local Development
 
 ```bash
-cd liminal-landing
 npm install
 
-# Add DATABASE_URL to .env (get from Vercel or use Neon/Supabase)
+# Add DATABASE_URL to .env
 echo 'DATABASE_URL="postgresql://..."' > .env
 
-# Push schema to database
-npx prisma db push
-
-# Start dev server
+# Run dev server
 npm run dev
 ```
+
+Get `DATABASE_URL` from:
+- Vercel Postgres (in Vercel dashboard → Storage)
+- [Neon](https://neon.tech) (free)
+- [Supabase](https://supabase.com) (free)
+
+Then run the SQL from `db/init.sql` in your database.
 
 ## 📦 What's Included
 
 - ✅ Waitlist form (name, email, phone)
-- ✅ PostgreSQL database (Prisma)
-- ✅ API endpoint (`/api/waitlist`)
-- ✅ Rate limiting & spam protection
+- ✅ PostgreSQL database
+- ✅ Vercel API function (`/api/waitlist`)
+- ✅ Rate limiting (8 req/min per IP)
+- ✅ Spam protection (honeypot)
 - ✅ Email validation
-- ✅ Duplicate handling
-- ✅ Ready for Vercel
 
-## 🗄️ Database Options
+## 🗄️ Database Schema
 
-- **Vercel Postgres** (recommended, integrated)
-- **Neon** (free, serverless PostgreSQL)
-- **Supabase** (free PostgreSQL)
-- **Railway** (PostgreSQL)
-
-Just add your `DATABASE_URL` to environment variables.
-
-## 📖 Full Documentation
-
-See [liminal-landing/WAITLIST_SETUP.md](./liminal-landing/WAITLIST_SETUP.md) for detailed setup instructions.
+```sql
+waitlist_entries
+├── id (bigserial)
+├── email (text, unique, required)
+├── name (text, optional)
+├── phone (text, optional)
+├── created_at (timestamp)
+└── updated_at (timestamp)
+```
 
 ## 🛠️ Tech Stack
 
-- Next.js 16 (App Router)
-- Prisma + PostgreSQL
-- Tailwind CSS
-- Shadcn UI
-- Framer Motion
-- Three.js (React Three Fiber)
+- Vite + React + TypeScript
+- Vercel Serverless Functions
+- PostgreSQL (Neon adapter)
+- Tailwind CSS + Shadcn UI
+- Framer Motion + Three.js

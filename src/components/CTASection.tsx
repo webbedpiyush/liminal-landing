@@ -1,8 +1,63 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+import { useState } from "react"
+import type { ChangeEvent, FormEvent } from "react"
 
 const CTASection = () => {
+  const [formValues, setFormValues] = useState({
+    email: "",
+    name: "",
+    phone: "",
+    website: "",
+  })
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormValues((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (status === "loading") return
+
+    if (!formValues.email.trim()) {
+      setStatus("error")
+      setErrorMessage("Email is required.")
+      return
+    }
+
+    setStatus("loading")
+    setErrorMessage("")
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formValues.email.trim(),
+          name: formValues.name.trim() || undefined,
+          phone: formValues.phone.trim() || undefined,
+          website: formValues.website,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Request failed")
+      }
+
+      setStatus("success")
+      setFormValues({ email: "", name: "", phone: "", website: "" })
+    } catch {
+      setStatus("error")
+      setErrorMessage("Something went wrong. Please try again.")
+    }
+  }
+
   return (
     <section className="py-32 md:py-48 relative overflow-hidden">
       {/* Background glow */}
@@ -31,11 +86,74 @@ const CTASection = () => {
             Each one a commitment to presence over performance.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <Button variant="solid" size="xl" className="group">
-              Reserve Your Pair
+          <form
+            onSubmit={handleSubmit}
+            className="grid gap-4 sm:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr_auto] items-center mb-10"
+          >
+            <label className="text-left">
+              <span className="sr-only">Name</span>
+              <input
+                type="text"
+                name="name"
+                value={formValues.name}
+                onChange={handleChange}
+                placeholder="Name (optional)"
+                autoComplete="name"
+                maxLength={80}
+                className="w-full rounded-md border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-smoke/70 focus:outline-none focus:ring-2 focus:ring-champagne/60"
+              />
+            </label>
+            <label className="text-left">
+              <span className="sr-only">Email</span>
+              <input
+                type="email"
+                name="email"
+                value={formValues.email}
+                onChange={handleChange}
+                placeholder="Email address"
+                autoComplete="email"
+                required
+                maxLength={320}
+                className="w-full rounded-md border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-smoke/70 focus:outline-none focus:ring-2 focus:ring-champagne/60"
+              />
+            </label>
+            <label className="text-left">
+              <span className="sr-only">Phone</span>
+              <input
+                type="tel"
+                name="phone"
+                value={formValues.phone}
+                onChange={handleChange}
+                placeholder="Phone (optional)"
+                autoComplete="tel"
+                inputMode="tel"
+                maxLength={30}
+                className="w-full rounded-md border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-smoke/70 focus:outline-none focus:ring-2 focus:ring-champagne/60"
+              />
+            </label>
+            <input
+              type="text"
+              name="website"
+              value={formValues.website}
+              onChange={handleChange}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+            <Button
+              type="submit"
+              variant="solid"
+              size="xl"
+              className="group w-full lg:w-auto"
+              disabled={status === "loading" || status === "success"}
+            >
+              {status === "success" ? "You're on the list" : "Join the waitlist"}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
+          </form>
+          <div className="min-h-[24px] text-sm text-smoke/80" aria-live="polite">
+            {status === "success" && "Thanks for joining. We'll be in touch soon."}
+            {status === "error" && errorMessage}
           </div>
 
           <div className="flex items-center justify-center gap-12 text-center">
@@ -57,7 +175,7 @@ const CTASection = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default CTASection;
+export default CTASection
