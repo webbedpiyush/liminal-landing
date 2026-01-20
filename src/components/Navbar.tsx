@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 
-const Navbar = () => {
+interface NavbarProps {
+  showNavLinks?: boolean;
+  showCta?: boolean;
+}
+
+const Navbar = ({ showNavLinks = true, showCta = true }: NavbarProps) => {
   return (
     <motion.nav
       initial={{ opacity: 0 }}
@@ -12,31 +17,37 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3">
-            <span className="font-display text-xl md:text-2xl font-light text-foreground tracking-wide">
-              <span className="text-champagne italic">Dashing</span> Glasses
-            </span>
+          <img
+              src="/favicon.ico"
+              alt="Dashing Glasses"
+              className="h-20 md:h-32 w-auto"
+            />
           </a>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-10">
-            <a href="#philosophy" className="font-body text-smoke hover:text-foreground transition-colors text-sm tracking-wide">
-              Philosophy
-            </a>
-            <a href="#moments" className="font-body text-smoke hover:text-foreground transition-colors text-sm tracking-wide">
-              Moments
-            </a>
-            <a href="#specs" className="font-body text-smoke hover:text-foreground transition-colors text-sm tracking-wide">
-              Specs
-            </a>
-          </div>
+          {showNavLinks && (
+            <div className="hidden md:flex items-center gap-10">
+              <a href="#philosophy" className="font-body text-smoke hover:text-foreground transition-colors text-sm tracking-wide">
+                Philosophy
+              </a>
+              <a href="#moments" className="font-body text-smoke hover:text-foreground transition-colors text-sm tracking-wide">
+                Moments
+              </a>
+              <a href="#specs" className="font-body text-smoke hover:text-foreground transition-colors text-sm tracking-wide">
+                Specs
+              </a>
+            </div>
+          )}
 
           {/* CTA */}
-          <a
-            href="#reserve"
-            className="font-body text-sm tracking-wide px-5 py-2.5 border border-champagne/40 text-champagne hover:bg-champagne hover:text-background transition-all duration-500"
-          >
-            Reserve
-          </a>
+          {showCta && (
+            <a
+              href="#reserve"
+              className="font-body text-sm tracking-wide px-5 py-2.5 border border-champagne/40 text-champagne hover:bg-champagne hover:text-background transition-all duration-500"
+            >
+              Reserve
+            </a>
+          )}
         </div>
       </div>
     </motion.nav>

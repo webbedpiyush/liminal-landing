@@ -34,8 +34,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="font-body text-smoke text-sm tracking-[0.3em] uppercase mb-8"
-          >
+            className="font-body text-smoke text-sm tracking-[0.3em] uppercase mb-8">
             Memory, Redefined
           </motion.p>
 
@@ -43,8 +42,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.7 }}
-            className="font-display text-6xl md:text-8xl lg:text-9xl font-light tracking-tight leading-[0.9] mb-8"
-          >
+            className="font-display text-6xl md:text-8xl lg:text-9xl font-light tracking-tight leading-[0.9] mb-8">
             <span className="text-gradient italic">Dashing</span>
             <br />
             <span className="text-foreground">Glasses</span>
@@ -54,10 +52,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1 }}
-            className="font-body text-lg md:text-xl text-smoke max-w-xl mx-auto leading-relaxed mb-12"
-          >
-            While others chase the extraordinary, we celebrate the everyday. 
-            Your dog's first trick. Your child's first steps. The moments that 
+            className="font-body text-lg md:text-xl text-smoke max-w-xl mx-auto leading-relaxed mb-12">
+            While others chase the extraordinary, we celebrate the everyday.
+            Your dog's first trick. Your child's first steps. The moments that
             matter most often happen when you least expect them.
           </motion.p>
 
@@ -65,13 +62,12 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.3 }}
-            className="flex flex-col sm:flex-row gap-6 items-center justify-center"
-          >
-            <Button variant="solid" size="xl">
-              Reserve Yours
+            className="flex flex-col sm:flex-row gap-6 items-center justify-center">
+            <Button variant="solid" size="xl" asChild>
+              <a href="/waitlist">Reserve Yours</a>
             </Button>
-            <Button variant="elegant" size="xl">
-              Experience
+            <Button variant="elegant" size="xl" asChild>
+              <a href="/interested">Book a Demo</a>
             </Button>
           </motion.div>
         </div>
@@ -81,10 +77,11 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
-      >
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20">
         <div className="flex flex-col items-center gap-3">
-          <span className="text-smoke text-xs tracking-[0.2em] uppercase">Scroll</span>
+          <span className="text-smoke text-xs tracking-[0.2em] uppercase">
+            Scroll
+          </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
