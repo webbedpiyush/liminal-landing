@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/blog",
+      "destination": "https://seo-content-proxy.piyushtiwarindls220.workers.dev/"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://seo-content-proxy.piyushtiwarindls220.workers.dev/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
