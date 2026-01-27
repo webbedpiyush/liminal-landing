@@ -43,7 +43,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.7 }}
             className="font-display text-6xl md:text-8xl lg:text-9xl font-light tracking-tight leading-[0.9] mb-8">
-            <span className="text-gradient italic">Dashing</span>
+            <span className="text-gradient italic">Liminal</span>
             <br />
             <span className="text-foreground">Glasses</span>
           </motion.h1>
@@ -52,17 +52,30 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1 }}
-            className="font-body text-lg md:text-xl text-smoke max-w-xl mx-auto leading-relaxed mb-12">
-            While others chase the extraordinary, we celebrate the everyday.
-            Your dog's first trick. Your child's first steps. The moments that
-            matter most often happen when you least expect them.
+            className="font-body text-lg md:text-xl text-smoke max-w-2xl mx-auto leading-relaxed mb-10">
+            We don't build gadgets. We build single-purpose tools that do one thing perfectly.
+            A camera when you need evidence. A memory machine when you need to be present.
           </motion.p>
+
+          {/* Product pills */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-8">
+            <Button variant="solid" size="xl" asChild>
+              <a href="#dashing">Dashing — for Consumers</a>
+            </Button>
+            <Button variant="elegant" size="xl" asChild>
+              <a href="#project67">Project 67 — for Enterprise</a>
+            </Button>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.3 }}
-            className="flex flex-col sm:flex-row gap-6 items-center justify-center">
+            transition={{ duration: 1, delay: 1.4 }}
+            className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             <Button variant="solid" size="xl" asChild>
               <a href="#reserve">Reserve Yours</a>
             </Button>
