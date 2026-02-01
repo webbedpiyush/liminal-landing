@@ -19,7 +19,7 @@ const competitors: CompetitorData[] = [
             camera: "12MP / 8MP GS",
             display: "None (Audio)",
             dataPrivacy: "Local / Evidence",
-            price: "$299 / $599",
+            price: "$99 / $199",
         },
     },
     {
