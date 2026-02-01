@@ -158,7 +158,7 @@ const CTASection = () => {
 
           <div className="flex items-center justify-center gap-12 text-center">
             <div>
-              <p className="font-display text-3xl text-champagne">$349</p>
+              <p className="font-display text-3xl text-champagne">$99</p>
               <p className="font-body text-xs text-smoke tracking-wider mt-1">Starting price</p>
             </div>
             <div className="w-px h-12 bg-border" />
